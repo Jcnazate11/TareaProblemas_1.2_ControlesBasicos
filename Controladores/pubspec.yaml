@@ -21,3 +21,6 @@ flutter:
   uses-material-design: true
   assets:
     - assets/imagenes/espeLogo.jpg
+    - assets/imagenes/factorial.png
+    - assets/imagenes/factorizacion.jpg
+

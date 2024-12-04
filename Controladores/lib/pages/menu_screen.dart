@@ -1,5 +1,9 @@
+
 import 'package:flutter/material.dart';
 import 'ejer1_screen.dart';
+import 'ejer2_screen.dart';
+
+import 'ejer4_screen.dart';
 
 class Menu extends StatelessWidget {
   @override
@@ -50,21 +54,22 @@ class Menu extends StatelessWidget {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => Ejer1()),
+                    MaterialPageRoute(builder: (context) => Ejercicio1()),
                   );
                 },
               ),
-              /*
+
               ListTile(
                 leading: Icon(Icons.done_outline),
                 title: Text('Ejercicio Nº2'),
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => Ejer2()),
+                    MaterialPageRoute(builder: (context) => Ejercicio2()),
                   );
                 },
               ),
+              /*
               ListTile(
                 leading: Icon(Icons.done_outline),
                 title: Text('Ejercicio Nº3'),
@@ -75,16 +80,18 @@ class Menu extends StatelessWidget {
                   );
                 },
               ),
+              */
               ListTile(
                 leading: Icon(Icons.done_outline),
                 title: Text('Ejercicio Nº4'),
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => Ejer4()),
+                    MaterialPageRoute(builder: (context) => Ejercicio4()),
                   );
                 },
               ),
+              /*
               ListTile(
                 leading: Icon(Icons.done_outline),
                 title: Text('Ejercicio Nº5'),
