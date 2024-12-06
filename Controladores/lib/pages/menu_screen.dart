@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'ejer1_screen.dart';
 import 'ejer2_screen.dart';
-
+import 'ejer5_screen.dart';
 import 'ejer4_screen.dart';
 
 class Menu extends StatelessWidget {
@@ -91,17 +91,17 @@ class Menu extends StatelessWidget {
                   );
                 },
               ),
-              /*
+
               ListTile(
                 leading: Icon(Icons.done_outline),
                 title: Text('Ejercicio Nº5'),
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => Ejer5()),
+                    MaterialPageRoute(builder: (context) => Ejercicio5Screen()),
                   );
                 },
-              ),
+              ), /*
               ListTile(
                 leading: Icon(Icons.done_outline),
                 title: Text('Ejercicio Nº6'),

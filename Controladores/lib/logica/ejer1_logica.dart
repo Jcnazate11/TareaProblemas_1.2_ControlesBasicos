@@ -1,42 +1,25 @@
 class Ejer1 {
-  const Ejer1();
+  List<List<Map<String, String>>> generarBloques() {
+    List<List<Map<String, String>>> bloques = [];
+    List<Map<String, String>> bloqueActual = [];
 
-  // Genera bloques de 23 valores
-  List<String> generarBloques() {
-    List<String> bloques = [];
-    StringBuffer bloqueActual = StringBuffer();
+    for (int i = 32; i <= 127; i++) {
+      bloqueActual.add({
+        'decimal': '$i',
+        'char': String.fromCharCode(i),
+        'hex': i.toRadixString(16).toUpperCase(),
+      });
 
-    for (int n = 0; n <= 255; n++) {
-      String caracter = n >= 32 && n <= 126
-          ? String.fromCharCode(n)
-          : '<${_descripcionCaracterControl(n)}>'; // Descripción para caracteres de control
-
-      // Añade número y carácter al bloque actual
-      bloqueActual.write('$n = \'$caracter\'\n');
-
-      // Cada 23 caracteres, guardar el bloque y comenzar uno nuevo
-      if ((n + 1) % 23 == 0 || n == 255) {
-        bloques.add(bloqueActual.toString());
-        bloqueActual.clear();
+      if (bloqueActual.length == 10) {
+        bloques.add(bloqueActual);
+        bloqueActual = [];
       }
     }
 
-    return bloques; // Devuelve la lista de bloques
-  }
-
-  // Descripciones para caracteres de control
-  String _descripcionCaracterControl(int n) {
-    switch (n) {
-      case 0:
-        return 'NULO';
-      case 9:
-        return 'TAB';
-      case 10:
-        return 'SALTO';
-      case 13:
-        return 'RETORNO';
-      default:
-        return 'CTRL$n';
+    if (bloqueActual.isNotEmpty) {
+      bloques.add(bloqueActual);
     }
+
+    return bloques;
   }
 }
