@@ -1,81 +1,108 @@
 import 'package:flutter/material.dart';
-import 'ejer2_result_screen.dart';
+import '../logica/ejer1_logica.dart';
+import 'ejer1_result_screen.dart';
 
-class Ejercicio1 extends StatefulWidget {
-  const Ejercicio1({Key? key}) : super(key: key);
-
+class Ejercicio1Screen extends StatefulWidget {
   @override
-  State<Ejercicio1> createState() => _PantallaEntradaState();
+  _Ejercicio1ScreenState createState() => _Ejercicio1ScreenState();
 }
 
-class _PantallaEntradaState extends State<Ejercicio1> {
-  final TextEditingController _controller = TextEditingController();
+class _Ejercicio1ScreenState extends State<Ejercicio1Screen> {
+  final Ejer1 _logica = Ejer1(); // Instancia de la lógica
+  late List<String> _bloques; // Bloques generados por la lógica
+  int _indiceActual = 0; // Índice del bloque actual
+
+  @override
+  void initState() {
+    super.initState();
+    _bloques = _logica.generarBloques(); // Generar los bloques al iniciar
+  }
+
+  void _navegarResultado() {
+    // Navegar hacia la pantalla de resultados
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => Ejer1ResultadoScreen(bloque: _bloques[_indiceActual]),
+      ),
+    );
+  }
+
+  void _siguienteBloque() {
+    setState(() {
+      if (_indiceActual < _bloques.length - 1) {
+        _indiceActual++; // Avanzar al siguiente bloque
+      }
+    });
+  }
+
+  void _reiniciar() {
+    setState(() {
+      _indiceActual = 0; // Reiniciar al primer bloque
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Cálculo Factorial'),
+        title: Text('Ejercicio 1 - Tabla ASCII'),
+        backgroundColor: Colors.blue,
       ),
       body: Container(
-        decoration: const BoxDecoration(
+        padding: EdgeInsets.all(16),
+        decoration: BoxDecoration(
           gradient: LinearGradient(
+            colors: [Colors.blue.shade600, Colors.cyan.shade300],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
-            colors: [
-              Colors.blue,
-              Colors.purple,
-            ],
           ),
         ),
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              // Imagen en el centro
-              const CircleAvatar(
-                radius: 50,
-                backgroundImage: AssetImage('assets/factorial_icon.png'),
-              ),
-              const SizedBox(height: 30),
-              const Text(
-                'Ingrese un número para calcular su factorial:',
-                style: TextStyle(fontSize: 18, color: Colors.white),
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(height: 16),
-              // Campo de texto más corto
-              SizedBox(
-                width: 200,
-                child: TextField(
-                  controller: _controller,
-                  keyboardType: TextInputType.number,
-                  decoration: const InputDecoration(
-                    filled: true,
-                    fillColor: Colors.white,
-                    border: OutlineInputBorder(),
-                    labelText: 'Número',
-                  ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            // Botón para navegar a la pantalla de resultados
+            ElevatedButton.icon(
+              icon: Icon(Icons.view_list),
+              label: Text('Ver Resultado Actual'),
+              onPressed: _navegarResultado,
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.green,
+                padding: EdgeInsets.symmetric(vertical: 16),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
                 ),
               ),
-              const SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: () {
-                  if (_controller.text.isNotEmpty) {
-                    final int numero = int.parse(_controller.text);
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => Ejer2Resultado(numero: numero),
-                      ),
-                    );
-                  }
-                },
-                child: const Text('Calcular'),
+            ),
+            SizedBox(height: 16),
+            // Botón para avanzar al siguiente bloque
+            ElevatedButton.icon(
+              icon: Icon(Icons.arrow_forward),
+              label: Text('Siguiente Bloque'),
+              onPressed: _indiceActual < _bloques.length - 1 ? _siguienteBloque : null,
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.blue,
+                padding: EdgeInsets.symmetric(vertical: 16),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
               ),
-            ],
-          ),
+            ),
+            SizedBox(height: 8),
+            // Botón para reiniciar la tabla
+            ElevatedButton.icon(
+              icon: Icon(Icons.restart_alt),
+              label: Text('Reiniciar'),
+              onPressed: _reiniciar,
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.redAccent,
+                padding: EdgeInsets.symmetric(vertical: 16),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );

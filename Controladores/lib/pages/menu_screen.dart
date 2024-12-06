@@ -54,7 +54,7 @@ class Menu extends StatelessWidget {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => Ejercicio1()),
+                    MaterialPageRoute(builder: (context) => Ejercicio1Screen()),
                   );
                 },
               ),

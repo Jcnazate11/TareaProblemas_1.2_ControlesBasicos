@@ -1,21 +1,42 @@
 class Ejer1 {
-  // Constructor vacío para esta clase
   const Ejer1();
 
-  String mostrarTabla() {
-    int n = -1;
-    StringBuffer salida = StringBuffer(); // Para acumular la salida en un String
+  // Genera bloques de 23 valores
+  List<String> generarBloques() {
+    List<String> bloques = [];
+    StringBuffer bloqueActual = StringBuffer();
 
-    while (++n <= 255) {
-      // Pausar cada 23 caracteres
-      if (n % 23 == 0 && n != 0) {
-        salida.write("\nPulse Enter para continuar...\n");
+    for (int n = 0; n <= 255; n++) {
+      String caracter = n >= 32 && n <= 126
+          ? String.fromCharCode(n)
+          : '<${_descripcionCaracterControl(n)}>'; // Descripción para caracteres de control
+
+      // Añade número y carácter al bloque actual
+      bloqueActual.write('$n = \'$caracter\'\n');
+
+      // Cada 23 caracteres, guardar el bloque y comenzar uno nuevo
+      if ((n + 1) % 23 == 0 || n == 255) {
+        bloques.add(bloqueActual.toString());
+        bloqueActual.clear();
       }
-
-      // Acumular el número y su carácter ASCII correspondiente
-      salida.write('\t$n = \'${String.fromCharCode(n)}\'\n');
     }
 
-    return salida.toString(); // Devolver la salida completa como String
+    return bloques; // Devuelve la lista de bloques
+  }
+
+  // Descripciones para caracteres de control
+  String _descripcionCaracterControl(int n) {
+    switch (n) {
+      case 0:
+        return 'NULO';
+      case 9:
+        return 'TAB';
+      case 10:
+        return 'SALTO';
+      case 13:
+        return 'RETORNO';
+      default:
+        return 'CTRL$n';
+    }
   }
 }
