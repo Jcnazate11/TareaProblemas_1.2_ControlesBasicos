@@ -1,4 +1,5 @@
 
+import 'package:controladores/pages/ejer3_screen.dart';
 import 'package:flutter/material.dart';
 import 'ejer1_screen.dart';
 import 'ejer2_screen.dart';
@@ -69,18 +70,18 @@ class Menu extends StatelessWidget {
                   );
                 },
               ),
-              /*
+
               ListTile(
                 leading: Icon(Icons.done_outline),
                 title: Text('Ejercicio Nº3'),
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => Ejer3()),
+                    MaterialPageRoute(builder: (context) => MCDInputScreen()),
                   );
                 },
               ),
-              */
+
               ListTile(
                 leading: Icon(Icons.done_outline),
                 title: Text('Ejercicio Nº4'),
@@ -101,17 +102,7 @@ class Menu extends StatelessWidget {
                     MaterialPageRoute(builder: (context) => Ejercicio5Screen()),
                   );
                 },
-              ), /*
-              ListTile(
-                leading: Icon(Icons.done_outline),
-                title: Text('Ejercicio Nº6'),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => Ejer6()),
-                  );
-                },
-              ),*/
+              ),
             ],
           ),
         ),
